@@ -14,14 +14,24 @@ const Product = props => {
   const getPrice = () => {
      /*Find an object in an array using arrow function and destructuring*/
     const objSize = props.sizes.find(({ name }) => name === currentSize);
-    console.log(objSize)   //  { name: 'S/M/,,,', additionalPrice: 5/2/... }
+    //console.log(objSize)   //  { name: 'S/M/,,,', additionalPrice: 5/2/... }
 
     const additionalPrice = objSize.additionalPrice;
-    console.log(additionalPrice);
+    //console.log(additionalPrice); // {additionalPrice: 5/2/...}
 
     return additionalPrice + props.basePrice;
   }
  
+  const addToCart = (e) => {
+      e.preventDefault();
+      console.log('Summary');
+      console.log('============');
+      console.log('Name:', props.title);
+      console.log('Size:', currentSize);
+      console.log('Color:', currentColor);
+      console.log('Price:', getPrice());
+    
+  } 
 
   const prepareColorClassName = color => {
   return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
@@ -58,7 +68,7 @@ const Product = props => {
               )}
             </ul>
           </div>
-          <Button className={styles.button}>
+          <Button className={styles.button} actionHandler={addToCart}>
             <span className="fa fa-shopping-cart" />
           </Button>
         </form>
